@@ -25,20 +25,16 @@ namespace PortlandLocalBusinesses.Controllers
 		}
 
 		[HttpGet]
-		public async Task<ActionResult<IEnumerable<Business>>> Get()
+		public async Task<ActionResult<IEnumerable<Business>>> Get(string name)
 		{
-			// IQueryable<Business> query = _db.Businesses.AsQueryable();
+			IQueryable<Business> query = _db.Businesses.AsQueryable();
 
-			// if (name != null)
-			// {
-			// 	query = query.Where(m => m.Name == name);
-			// }
+			if (name != null)
+			{
+				query = query.Where(m => m.Name == name);
+			}
 
-			// if (description != null)
-			// {
-			// 	query = query.Where(m => m.Description >= description);
-			// }
-			return await _db.Businesses.ToListAsync();
+			return await query.ToListAsync();
 		}
 
 		[HttpPost]
@@ -58,7 +54,6 @@ namespace PortlandLocalBusinesses.Controllers
 				return NotFound();
 			}
 			return business;
-      // CreatedAtAction(nameof(GetBusiness), new { id = business.BusinessId }, business);
 		}
 
 		[HttpPut("{id}")]
@@ -88,5 +83,20 @@ namespace PortlandLocalBusinesses.Controllers
 			}
 			return NoContent();
 		}
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteBusiness(int id)
+    {
+      var business = await _db.Businesses.FindAsync(id);
+      if (business == null)
+      {
+        return NotFound();
+      }
+
+      _db.Businesses.Remove(business);
+      await _db.SaveChangesAsync();
+
+      return NoContent();
+    }
 	}
 }

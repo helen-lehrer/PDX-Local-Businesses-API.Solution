@@ -11,7 +11,7 @@ namespace PortlandLocalBusinesses.Models
     public string Description { get; set; }
     public string PhoneNumber { get; set; }
     public int NeighborhoodId { get; set; }
-		// public Neighborhood Neighborhood { get; set; }
+		public Neighborhood Neighborhood { get; set; }
 	
     // public static List<Business> GetBusinesses()
     // {
