@@ -41,19 +41,20 @@ namespace PortlandLocalBusinesses.Controllers
 		{
 			_db.Businesses.Add(business);
 			await _db.SaveChangesAsync();
-			return CreatedAtAction("Post", new {id = business.BusinessId}, business);
+			return CreatedAtAction(nameof(GetBusiness), new {id = business.BusinessId}, business);
 		}
 
-		// [HttpGet("{id}")]
-		// public async Task<ActionResult<Business>> GetBusiness(int id)
-		// {
-		// 	Business business = await _db.Businesses.FindAsync(id);
-		// 	if (business == null)
-		// 	{
-		// 		return NotFound();
-		// 	}
-		// 	return CreatedAtAction(nameof(GetBusiness), new { id = business.BusinessId }, business);
-		// }
+		[HttpGet("{id}")]
+		public async Task<ActionResult<Business>> GetBusiness(int id)
+		{
+			Business business = await _db.Businesses.FindAsync(id);
+			if (business == null)
+			{
+				return NotFound();
+			}
+			return business;
+      // CreatedAtAction(nameof(GetBusiness), new { id = business.BusinessId }, business);
+		}
 
 		// [HttpPut("{id}")]
 		// public async Task<IActionResult> Put(int id, Business business)
