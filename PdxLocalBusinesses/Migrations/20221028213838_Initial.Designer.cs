@@ -8,7 +8,7 @@ using PdxLocalBusinesses.Models;
 namespace MessageBoard.Migrations
 {
     [DbContext(typeof(PdxLocalBusinessesContext))]
-    [Migration("20221028170210_Initial")]
+    [Migration("20221028213838_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,15 +25,19 @@ namespace MessageBoard.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Name")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4");
 
                     b.Property<int>("NeighborhoodId")
                         .HasColumnType("int");
 
                     b.Property<string>("PhoneNumber")
+                        .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("BusinessId");
@@ -92,7 +96,9 @@ namespace MessageBoard.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4");
 
                     b.HasKey("NeighborhoodId");
 
@@ -353,11 +359,13 @@ namespace MessageBoard.Migrations
 
             modelBuilder.Entity("PdxLocalBusinesses.Models.Business", b =>
                 {
-                    b.HasOne("PdxLocalBusinesses.Models.Neighborhood", null)
+                    b.HasOne("PdxLocalBusinesses.Models.Neighborhood", "Neighborhood")
                         .WithMany("Businesses")
                         .HasForeignKey("NeighborhoodId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Neighborhood");
                 });
 
             modelBuilder.Entity("PdxLocalBusinesses.Models.Neighborhood", b =>
