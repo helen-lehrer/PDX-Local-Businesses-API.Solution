@@ -2,11 +2,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Proxies;
 using System;
 
-namespace PortlandLocalBusinesses.Models
+namespace PdxLocalBusinesses.Models
 {
-	public class PortlandLocalBusinessesContext : DbContext
+	public class PdxLocalBusinessesContext : DbContext
 	{
-		public PortlandLocalBusinessesContext(DbContextOptions<PortlandLocalBusinessesContext> options) : base(options)
+		public PdxLocalBusinessesContext(DbContextOptions<PdxLocalBusinessesContext> options) : base(options)
 		{
 
 		}

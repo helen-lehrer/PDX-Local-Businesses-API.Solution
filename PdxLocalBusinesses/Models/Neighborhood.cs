@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 
-namespace PortlandLocalBusinesses.Models
+namespace PdxLocalBusinesses.Models
 {
   public class Neighborhood
   {

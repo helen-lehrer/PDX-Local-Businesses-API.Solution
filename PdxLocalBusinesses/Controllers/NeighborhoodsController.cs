@@ -2,18 +2,18 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using PortlandLocalBusinesses.Models;
+using PdxLocalBusinesses.Models;
 using System.Linq;
 
-namespace PortlandLocalBusinesses.Controllers
+namespace PdxLocalBusinesses.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
 	public class NeighborhoodsController : ControllerBase
 	{
-		private readonly PortlandLocalBusinessesContext _db;
+		private readonly PdxLocalBusinessesContext _db;
 
-		public NeighborhoodsController(PortlandLocalBusinessesContext db)
+		public NeighborhoodsController(PdxLocalBusinessesContext db)
 		{
 			_db = db;
 		}

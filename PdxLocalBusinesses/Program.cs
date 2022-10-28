@@ -8,7 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore.Proxies;
 
-namespace PortlandLocalBusinesses
+namespace PdxLocalBusinesses
 {
     public class Program
     {

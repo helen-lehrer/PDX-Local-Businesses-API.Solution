@@ -12,12 +12,12 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/PortlandLocalBusinesses",
+      "launchUrl": "api/PdxLocalBusinesses",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "PortlandLocalBusinesses": {
+    "PdxLocalBusinesses": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,

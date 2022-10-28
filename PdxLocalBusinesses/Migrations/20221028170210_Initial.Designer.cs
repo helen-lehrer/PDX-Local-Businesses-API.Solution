@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using PortlandLocalBusinesses.Models;
+using PdxLocalBusinesses.Models;
 
 namespace MessageBoard.Migrations
 {
-    [DbContext(typeof(PortlandLocalBusinessesContext))]
+    [DbContext(typeof(PdxLocalBusinessesContext))]
     [Migration("20221028170210_Initial")]
     partial class Initial
     {
@@ -18,7 +18,7 @@ namespace MessageBoard.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.0");
 
-            modelBuilder.Entity("PortlandLocalBusinesses.Models.Business", b =>
+            modelBuilder.Entity("PdxLocalBusinesses.Models.Business", b =>
                 {
                     b.Property<int>("BusinessId")
                         .ValueGeneratedOnAdd()
@@ -85,7 +85,7 @@ namespace MessageBoard.Migrations
                         });
                 });
 
-            modelBuilder.Entity("PortlandLocalBusinesses.Models.Neighborhood", b =>
+            modelBuilder.Entity("PdxLocalBusinesses.Models.Neighborhood", b =>
                 {
                     b.Property<int>("NeighborhoodId")
                         .ValueGeneratedOnAdd()
@@ -351,16 +351,16 @@ namespace MessageBoard.Migrations
                         });
                 });
 
-            modelBuilder.Entity("PortlandLocalBusinesses.Models.Business", b =>
+            modelBuilder.Entity("PdxLocalBusinesses.Models.Business", b =>
                 {
-                    b.HasOne("PortlandLocalBusinesses.Models.Neighborhood", null)
+                    b.HasOne("PdxLocalBusinesses.Models.Neighborhood", null)
                         .WithMany("Businesses")
                         .HasForeignKey("NeighborhoodId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PortlandLocalBusinesses.Models.Neighborhood", b =>
+            modelBuilder.Entity("PdxLocalBusinesses.Models.Neighborhood", b =>
                 {
                     b.Navigation("Businesses");
                 });

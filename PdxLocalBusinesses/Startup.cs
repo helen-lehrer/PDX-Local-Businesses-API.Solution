@@ -4,9 +4,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
-using PortlandLocalBusinesses.Models;
+using PdxLocalBusinesses.Models;
 
-namespace PortlandLocalBusinesses
+namespace PdxLocalBusinesses
 {
     public class Startup
     {
@@ -18,7 +18,7 @@ namespace PortlandLocalBusinesses
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<PortlandLocalBusinessesContext>(opt =>
+            services.AddDbContext<PdxLocalBusinessesContext>(opt =>
                 opt.UseMySql(Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(Configuration["ConnectionStrings:DefaultConnection"])));
             services.AddControllers();
         }
