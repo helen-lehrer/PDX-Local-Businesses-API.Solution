@@ -67,7 +67,7 @@ namespace PortlandLocalBusinesses.Models
           new Neighborhood { NeighborhoodId = 47, Name= "Alameda" },
           new Neighborhood { NeighborhoodId = 48, Name= "Richmond" },
           new Neighborhood { NeighborhoodId = 49, Name= "Sunnyside" },
-          new Neighborhood { NeighborhoodId = 50, Name= "Hillsdale" },
+          new Neighborhood { NeighborhoodId = 50, Name= "Hillsdale" }
         );
 
 			builder.Entity<Business>()
@@ -111,7 +111,7 @@ namespace PortlandLocalBusinesses.Models
             Description = "Your photos printed on Canvas and Fine Art Papers",  
 						PhoneNumber = "503-896-5643", 
 						NeighborhoodId = 41
-					},
+					}
 
 				);
     }
