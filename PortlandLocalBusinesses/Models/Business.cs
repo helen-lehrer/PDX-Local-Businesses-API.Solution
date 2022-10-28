@@ -18,16 +18,5 @@ namespace PortlandLocalBusinesses.Models
     public int NeighborhoodId { get; set; }
     [JsonIgnore]
 		public Neighborhood Neighborhood { get; set; }
-	
-    // public static List<Business> GetBusinesses()
-    // {
-    //   var apiCallTask = ApiHelper.GetAll();
-    //   var result = apiCallTask.Result;
-
-    //   JArray jsonResponse = JsonConvert.DeserializeObject<JArray>(result);
-    //   List<Business> businessList = JsonConvert.DeserializeObject<List<Business>>(jsonResponse.ToString());
-
-    //   return businessList;
-    // }
   }
 }
