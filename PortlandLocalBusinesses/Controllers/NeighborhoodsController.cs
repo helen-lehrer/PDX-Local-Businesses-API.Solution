@@ -51,7 +51,7 @@ namespace PortlandLocalBusinesses.Controllers
 			{
 				return NotFound();
 			}
-			return await neighborhood.ToListAsync();;
+			return await neighborhood.ToListAsync();
 		}
 
 		[HttpPut("{id}")]
@@ -81,5 +81,20 @@ namespace PortlandLocalBusinesses.Controllers
 			}
 			return NoContent();
 		}
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+      var neighborhood = await _db.Neighborhoods.FindAsync(id);
+      if (neighborhood == null)
+      {
+        return NotFound();
+      }
+
+      _db.Neighborhoods.Remove(neighborhood);
+      await _db.SaveChangesAsync();
+
+      return NoContent();
+    }
 	}
 }
