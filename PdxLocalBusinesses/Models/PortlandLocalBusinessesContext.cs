@@ -13,6 +13,7 @@ namespace PdxLocalBusinesses.Models
 
 		public DbSet<Business> Businesses {get; set;}
 		public DbSet<Neighborhood> Neighborhoods {get; set;}
+    public DbSet<Users> Users {get; set;}
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

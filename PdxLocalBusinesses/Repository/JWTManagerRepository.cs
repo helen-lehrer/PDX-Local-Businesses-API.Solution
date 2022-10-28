@@ -15,9 +15,7 @@ namespace PdxLocalBusinesses.Repository
     //can do this with a database
     Dictionary<string, string> UsersRecords = new Dictionary<string, string>
     {
-      { "user1","password1"},
-      { "user2","password2"},
-      { "user3","password3"},
+      { "user","validate"},
     };
 
     private readonly IConfiguration iconfiguration;
