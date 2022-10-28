@@ -1,79 +1,85 @@
-// using System.Collections.Generic;
-// using System.Threading.Tasks;
-// using Microsoft.AspNetCore.Mvc;
-// using Microsoft.EntityFrameworkCore;
-// using PortlandLocalBusinesses.Models;
-// using System.Linq;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using PortlandLocalBusinesses.Models;
+using System.Linq;
 
-// namespace PortlandLocalBusinesses.Controllers
-// {
-// 	[Route("api/[controller]")]
-// 	[ApiController]
-// 	public class GroupsController : ControllerBase
-// 	{
-// 		private readonly PortlandLocalBusinessesContext _db;
+namespace PortlandLocalBusinesses.Controllers
+{
+	[Route("api/[controller]")]
+	[ApiController]
+	public class NeighborhoodsController : ControllerBase
+	{
+		private readonly PortlandLocalBusinessesContext _db;
 
-// 		public GroupsController(PortlandLocalBusinessesContext db)
-// 		{
-// 			_db = db;
-// 		}
+		public NeighborhoodsController(PortlandLocalBusinessesContext db)
+		{
+			_db = db;
+		}
 
-// 		[HttpGet]
-// 		public async Task<ActionResult<IEnumerable<Group>>> GetGroups()
-// 		{
-// 			return await _db.Groups.Include(g => g.Messages).ToListAsync();
-// 		}
+    private bool NeighborhoodExists(int id)
+		{
+			return _db.Neighborhoods.Any(m => m.NeighborhoodId == id);
+		}
 
-// 		[HttpPost]
-// 		public async Task<ActionResult<Group>> Post(Group group)
-// 		{
-// 			_db.Groups.Add(group);
-// 			await _db.SaveChangesAsync();
-// 			return CreatedAtAction("Post", new {id = group.GroupId}, group);
-// 		}
+		[HttpGet]
+		public async Task<ActionResult<IEnumerable<Neighborhood>>> Get(string name)
+		{
+      IQueryable<Neighborhood> query = _db.Neighborhoods.Include(g => g.Businesses).AsQueryable();
 
-// 		[HttpGet("{id}")]
-// 		public async Task<ActionResult<IEnumerable<Message>>> GetGroupMessages(int id)
-// 		{
-//       Group group = await _db.Groups.FindAsync(id);
-// 			if (group == null)
-// 			{
-// 				return NotFound();
-// 			}
-// 			return await _db.Messages.Where(e => e.GroupId == id).ToListAsync();
-// 		}
+			if (name != null)
+			{
+				query = query.Where(m => m.Name == name);
+			}
+			return await query.ToListAsync();
+		}
 
-// 		[HttpPut("{id}")]
-// 		public async Task<IActionResult> Put(int id, Group group)
-// 		{
-// 			if (id != group.GroupId)
-// 			{
-// 				return BadRequest();
-// 			}
+		[HttpPost]
+		public async Task<ActionResult<Neighborhood>> Post(Neighborhood neighborhood)
+		{
+			_db.Neighborhoods.Add(neighborhood);
+			await _db.SaveChangesAsync();
+			return CreatedAtAction(nameof(GetNeighborhood), new {id = neighborhood.NeighborhoodId}, neighborhood);
+		}
 
-// 			_db.Entry(group).State = EntityState.Modified;
+		[HttpGet("{id}")]
+		public async Task<ActionResult<IEnumerable<Neighborhood>>> GetNeighborhood(int id)
+		{
+      IQueryable<Neighborhood> neighborhood = _db.Neighborhoods.Include(n => n.Businesses).AsQueryable().Where(n => n.NeighborhoodId == id);
+			if (neighborhood == null)
+			{
+				return NotFound();
+			}
+			return await neighborhood.ToListAsync();;
+		}
 
-// 			try
-// 			{
-// 				await _db.SaveChangesAsync();
-// 			}
-// 			catch(DbUpdateConcurrencyException)
-// 			{
-// 				if (!GroupExists(id))
-// 				{
-// 					return NotFound();
-// 				}
-// 				else
-// 				{
-// 					throw;
-// 				}
-// 			}
-// 			return NoContent();
-// 		}
+		[HttpPut("{id}")]
+		public async Task<IActionResult> Put(int id, Neighborhood neighborhood)
+		{
+			if (id != neighborhood.NeighborhoodId)
+			{
+				return BadRequest();
+			}
 
-// 		private bool GroupExists(int id)
-// 		{
-// 			return _db.Groups.Any(m => m.GroupId == id);
-// 		}
-// 	}
-// }
+			_db.Entry(neighborhood).State = EntityState.Modified;
+
+			try
+			{
+				await _db.SaveChangesAsync();
+			}
+			catch(DbUpdateConcurrencyException)
+			{
+				if (!NeighborhoodExists(id))
+				{
+					return NotFound();
+				}
+				else
+				{
+					throw;
+				}
+			}
+			return NoContent();
+		}
+	}
+}

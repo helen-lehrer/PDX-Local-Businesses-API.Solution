@@ -1,6 +1,7 @@
 using System; 
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace PortlandLocalBusinesses.Models
 {
@@ -15,6 +16,7 @@ namespace PortlandLocalBusinesses.Models
     [Required]
     public string PhoneNumber { get; set; }
     public int NeighborhoodId { get; set; }
+    [JsonIgnore]
 		public Neighborhood Neighborhood { get; set; }
 	
     // public static List<Business> GetBusinesses()
