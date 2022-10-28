@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using PdxLocalBusinesses.Models;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace PdxLocalBusinesses
 {
@@ -20,6 +22,29 @@ namespace PdxLocalBusinesses
         {
             services.AddDbContext<PdxLocalBusinessesContext>(opt =>
                 opt.UseMySql(Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(Configuration["ConnectionStrings:DefaultConnection"])));
+
+            	services.AddAuthentication(x =>
+              {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+              }).AddJwtBearer(o =>
+              {
+                var Key = Encoding.UTF8.GetBytes(Configuration["JWT:Key"]);
+                o.SaveToken = true;
+                o.TokenValidationParameters = new TokenValidationParameters
+                {
+                  ValidateIssuer = false,
+                  ValidateAudience = false,
+                  ValidateLifetime = true,
+                  ValidateIssuerSigningKey = true,
+                  ValidIssuer = Configuration["JWT:Issuer"],
+                  ValidAudience = Configuration["JWT:Audience"],
+                  IssuerSigningKey = new SymmetricSecurityKey(Key)
+                };
+              });
+
+              services.AddSingleton<IJWTManagerRepository, JWTManagerRepository>();
+
             services.AddControllers();
         }
         
@@ -31,6 +56,7 @@ namespace PdxLocalBusinesses
             }
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
