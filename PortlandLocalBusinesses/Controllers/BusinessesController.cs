@@ -19,6 +19,11 @@ namespace PortlandLocalBusinesses.Controllers
 			_db = db;
 		}
 
+    private bool BusinessExists(int id)
+		{
+			return _db.Businesses.Any(m => m.BusinessId == id);
+		}
+
 		[HttpGet]
 		public async Task<ActionResult<IEnumerable<Business>>> Get()
 		{
@@ -56,36 +61,32 @@ namespace PortlandLocalBusinesses.Controllers
       // CreatedAtAction(nameof(GetBusiness), new { id = business.BusinessId }, business);
 		}
 
-		// [HttpPut("{id}")]
-		// public async Task<IActionResult> Put(int id, Business business)
-		// {
-		// 	if (id != business.BusinessId)
-		// 	{
-		// 		return BadRequest();
-		// 	}
+		[HttpPut("{id}")]
+		public async Task<IActionResult> Put(int id, Business business)
+		{
+			if (id != business.BusinessId)
+			{
+				return BadRequest();
+			}
 
-		// 	_db.Entry(business).State = EntityState.Modified;
+			_db.Entry(business).State = EntityState.Modified;
 
-		// 	try
-		// 	{
-		// 		await _db.SaveChangesAsync();
-		// 	}
-		// 	catch(DbUpdateConcurrencyException)
-		// 	{
-		// 		if(!BusinessExists(id))
-		// 		{
-		// 			return NotFound();
-		// 		}
-		// 		else
-		// 		{
-		// 			throw;
-		// 		}
-		// 	}
-		// 	return NoContent();
-		// }
-
-		// private bool BusinessExists(int id)
-		// {
-		// 	return _db.Businesses.Any(m => m.BusinessId == id);
+			try
+			{
+				await _db.SaveChangesAsync();
+			}
+			catch(DbUpdateConcurrencyException)
+			{
+				if(!BusinessExists(id))
+				{
+					return NotFound();
+				}
+				else
+				{
+					throw;
+				}
+			}
+			return NoContent();
 		}
 	}
+}
