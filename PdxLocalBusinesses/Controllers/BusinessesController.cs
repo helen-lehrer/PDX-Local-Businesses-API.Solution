@@ -5,19 +5,39 @@ using Microsoft.EntityFrameworkCore;
 using PdxLocalBusinesses.Models;
 using System.Linq;
 using System;
+using Microsoft.AspNetCore.Authorization;
+using PdxLocalBusinesses.Repository;
 
 namespace PdxLocalBusinesses.Controllers
 {
+  [Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class BusinessesController : ControllerBase
 	{
 		private readonly PdxLocalBusinessesContext _db;
+    private readonly IJWTManagerRepository _jWTManager;
 
-		public BusinessesController(PdxLocalBusinessesContext db)
+		public BusinessesController(PdxLocalBusinessesContext db, IJWTManagerRepository jWTManager)
 		{
 			_db = db;
+      this._jWTManager = jWTManager;
+
 		}
+
+    [AllowAnonymous]
+    [HttpPost]
+    [Route("authenticate")]
+    public IActionResult Authenticate(User usersdata)
+    {
+      var token = _jWTManager.Authenticate(usersdata);
+
+      if (token == null)
+      {
+        return Unauthorized();
+      }
+         return Ok(token);
+    }
 
     private bool BusinessExists(int id)
 		{

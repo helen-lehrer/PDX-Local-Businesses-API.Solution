@@ -13,7 +13,7 @@ namespace PdxLocalBusinesses.Models
 
 		public DbSet<Business> Businesses {get; set;}
 		public DbSet<Neighborhood> Neighborhoods {get; set;}
-    public DbSet<Users> Users {get; set;}
+    public DbSet<User> Users {get; set;}
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -115,6 +115,16 @@ namespace PdxLocalBusinesses.Models
 					}
 
 				);
+
+        builder.Entity<User>()
+				.HasData(
+					new User
+					{ 
+						UserId = 1, 
+						Name = "user",
+            Password = "validate"
+					}
+        );
     }
   }
 }

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PdxLocalBusinesses.Models;
 
-namespace MessageBoard.Migrations
+namespace PdxLocalBusinesses.Migrations
 {
     [DbContext(typeof(PdxLocalBusinessesContext))]
     partial class PdxLocalBusinessesContextModelSnapshot : ModelSnapshot
@@ -352,6 +352,31 @@ namespace MessageBoard.Migrations
                         {
                             NeighborhoodId = 50,
                             Name = "Hillsdale"
+                        });
+                });
+
+            modelBuilder.Entity("User", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            Name = "user",
+                            Password = "validate"
                         });
                 });
 

@@ -4,44 +4,50 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using PdxLocalBusinesses.Repository;
 
-[Authorize]
-[Route("api/[controller]")]
-[ApiController]  
-public class UsersController : ControllerBase
+namespace PdxLocalBusinesses.Controllers
 {
-	private readonly IJWTManagerRepository _jWTManager;
+  [Authorize]
+  [Route("api/[controller]")]
+  [ApiController]  
+  public class UsersController : ControllerBase
+  {
+    private readonly PdxLocalBusinessesContext _db;
+    private readonly IJWTManagerRepository _jWTManager;
 
-	public UsersController(IJWTManagerRepository jWTManager)
-	{
-		this._jWTManager = jWTManager;
-	}
-
-	[HttpGet]
-	public List<string> Get()
-	{
-    //link to database
-		var users = new List<string>
+		public UsersController(PdxLocalBusinessesContext db, IJWTManagerRepository jWTManager)
 		{
-			"Satinder Singh",
-			"Amit Sarna",
-			"Davin Jon"
-		};
+			_db = db;
+      this._jWTManager = jWTManager;
 
-		return users;
-	}
-
-	[AllowAnonymous]
-	[HttpPost]
-	[Route("authenticate")]
-	public IActionResult Authenticate(Users usersdata)
-	{
-		var token = _jWTManager.Authenticate(usersdata);
-
-		if (token == null)
-		{
-			return Unauthorized();
 		}
 
-		return Ok(token);
-	}
+    [HttpGet]
+    public List<string> Get()
+    {
+      //link to database
+      var users = new List<string>
+      {
+        "Satinder Singh",
+        "Amit Sarna",
+        "Davin Jon"
+      };
+
+      return users;
+    }
+
+    [AllowAnonymous]
+    [HttpPost]
+    [Route("authenticate")]
+    public IActionResult Authenticate(User usersdata)
+    {
+      var token = _jWTManager.Authenticate(usersdata);
+
+      if (token == null)
+      {
+        return Unauthorized();
+      }
+
+      return Ok(token);
+    }
+  }
 }

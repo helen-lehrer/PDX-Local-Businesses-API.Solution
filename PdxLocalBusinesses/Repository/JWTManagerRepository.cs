@@ -23,7 +23,7 @@ namespace PdxLocalBusinesses.Repository
     {
       this.iconfiguration = iconfiguration;
     }
-    public Tokens Authenticate(Users users)
+    public Tokens Authenticate(User users)
     {
       if (!UsersRecords.Any(x => x.Key == users.Name && x.Value == users.Password)) {
         return null;
