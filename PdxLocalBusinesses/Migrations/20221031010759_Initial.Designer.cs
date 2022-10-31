@@ -8,7 +8,7 @@ using PdxLocalBusinesses.Models;
 namespace PdxLocalBusinesses.Migrations
 {
     [DbContext(typeof(PdxLocalBusinessesContext))]
-    [Migration("20221029200727_Initial")]
+    [Migration("20221031010759_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -354,31 +354,6 @@ namespace PdxLocalBusinesses.Migrations
                         {
                             NeighborhoodId = 50,
                             Name = "Hillsdale"
-                        });
-                });
-
-            modelBuilder.Entity("User", b =>
-                {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = 1,
-                            Name = "user",
-                            Password = "validate"
                         });
                 });
 

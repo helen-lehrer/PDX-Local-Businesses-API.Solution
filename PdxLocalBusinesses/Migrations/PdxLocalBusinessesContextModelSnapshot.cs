@@ -355,31 +355,6 @@ namespace PdxLocalBusinesses.Migrations
                         });
                 });
 
-            modelBuilder.Entity("User", b =>
-                {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = 1,
-                            Name = "user",
-                            Password = "validate"
-                        });
-                });
-
             modelBuilder.Entity("PdxLocalBusinesses.Models.Business", b =>
                 {
                     b.HasOne("PdxLocalBusinesses.Models.Neighborhood", "Neighborhood")

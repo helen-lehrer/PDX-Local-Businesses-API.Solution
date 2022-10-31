@@ -4,9 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PdxLocalBusinesses.Models;
 using System.Linq;
+using System;
+using Microsoft.AspNetCore.Authorization;
+using PdxLocalBusinesses.Repository;
 
 namespace PdxLocalBusinesses.Controllers
 {
+  [Authorize]
 	[Route("api/[controller]")]
 	[ApiController]
 	public class NeighborhoodsController : ControllerBase

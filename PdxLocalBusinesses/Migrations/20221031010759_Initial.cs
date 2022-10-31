@@ -21,20 +21,6 @@ namespace PdxLocalBusinesses.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    UserId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    Password = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.UserId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Businesses",
                 columns: table => new
                 {
@@ -72,8 +58,8 @@ namespace PdxLocalBusinesses.Migrations
                     { 35, "Boise" },
                     { 36, "Central Eastside" },
                     { 37, "Nob Hill" },
-                    { 27, "Arnold Creek" },
                     { 38, "Montavilla" },
+                    { 39, "Southeast Portland" },
                     { 40, "Pleasant Valley" },
                     { 41, "Lloyd District" },
                     { 42, "Creston - Kenilworth" },
@@ -83,10 +69,9 @@ namespace PdxLocalBusinesses.Migrations
                     { 46, "Sabin" },
                     { 47, "Alameda" },
                     { 48, "Richmond" },
-                    { 49, "Sunnyside" },
-                    { 39, "Southeast Portland" },
-                    { 50, "Hillsdale" },
+                    { 27, "Arnold Creek" },
                     { 26, "Buckman" },
+                    { 25, "Hollywood" },
                     { 24, "Northeast Portland" },
                     { 2, "Pearl District" },
                     { 3, "Goose Hollow Foothills League" },
@@ -98,7 +83,7 @@ namespace PdxLocalBusinesses.Migrations
                     { 9, "Irvington" },
                     { 10, "Southwest Hills" },
                     { 11, "Hosford-Abernethy" },
-                    { 25, "Hollywood" },
+                    { 49, "Sunnyside" },
                     { 12, "Northwest Heights" },
                     { 14, "Healy Heights" },
                     { 15, "Kerns" },
@@ -110,13 +95,9 @@ namespace PdxLocalBusinesses.Migrations
                     { 21, "Marshall Park" },
                     { 22, "Northwest Industrial" },
                     { 23, "Grant Park" },
-                    { 13, "Beaumont - Wilshire" }
+                    { 13, "Beaumont - Wilshire" },
+                    { 50, "Hillsdale" }
                 });
-
-            migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "UserId", "Name", "Password" },
-                values: new object[] { 1, "user", "validate" });
 
             migrationBuilder.InsertData(
                 table: "Businesses",
@@ -140,9 +121,6 @@ namespace PdxLocalBusinesses.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Businesses");
-
-            migrationBuilder.DropTable(
-                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Neighborhoods");
