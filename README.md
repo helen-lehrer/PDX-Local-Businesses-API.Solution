@@ -4,7 +4,7 @@
 
 ## Description
 
-A One-To-Many API for a local businesses in Portland, OR. `Business`es may belong to a single `Neighborhood`. Portland neighborhood data is seeded and cannot be edited. Businesses have full CRUD functionality. JWT Authentication is implemented.
+A One-To-Many API for a local businesses in Portland, OR. `Business`es may belong to a single `Neighborhood`. Businesses and Neighborhoods have full CRUD functionality. JWT Authentication is implemented.
 
 Features:
 
@@ -122,9 +122,14 @@ Enter the following into the Body:
 GET requests:
 
 Returns all businesses: http://localhost:5000/api/businesses 
+
 Returns a specific business by ID: http://localhost:5000/api/businesses/{id}
+
 Returns all neighborhoods: http://localhost:5000/api/neighborhoods
+
 Returns a specific neighborhood by ID: http://localhost:5000/api/neighborhoods/{id}
+
+---
 
 POST requests:
 
@@ -149,14 +154,20 @@ JSON format for adding a new neighborhood:
 }
 ```
 
+---
+
 PUT requests:
 
 Edit a neighborhood: http://localhost:5000/api/neighborhoods/{id}
+
 Edit a business: http://localhost:5000/api/businesses/{id}
+
+---
 
 DELETE requests:
 
 Delete a neighborhood: http://localhost:5000/api/neighborhoods/{id}
+
 Delete a business: http://localhost:5000/api/businesses/{id}
 
 
