@@ -45,7 +45,7 @@ $ dotnet build
 
 ---
 
-#### Database Import/Configuration:
+## Database Import/Configuration:
 
 * Download, install, and configure [MySQL](https://dev.mysql.com/downloads/installer/)
 
@@ -106,7 +106,7 @@ $ dotnet run
 
 * The API is hosted on http://localhost:5000/ 
 
-#### Authorization:
+## Authorization:
 
 * Using [Postman](https://www.postman.com/), set up a POST request for the route http://localhost:5000/api/businesses/authenticate
 
@@ -117,7 +117,7 @@ Enter the following into the Body:
 
 * The response will contain a JWT Token. Copy and paste the token into the Auth Section of the Header. Your get requests will now be authorized for 48 hrs, after which you will need to get a new token.
 
-#### API Endpoints:
+## API Endpoints:
 
 GET requests:
 
