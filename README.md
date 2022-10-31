@@ -125,9 +125,13 @@ Returns all businesses: http://localhost:5000/api/businesses
 
 Returns a specific business by ID: http://localhost:5000/api/businesses/{id}
 
+Query a business by name: http://localhost:5000/api/businesses?name={business name} 
+
 Returns all neighborhoods: http://localhost:5000/api/neighborhoods
 
 Returns a specific neighborhood by ID: http://localhost:5000/api/neighborhoods/{id}
+
+Query a neighborhood by name: http://localhost:5000/api/businesses?name={neighborhood name}
 
 ---
 
